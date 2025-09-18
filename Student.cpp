@@ -55,5 +55,5 @@ int Student::search(LinkedList<Student> students_list, int id) {
             return i;
         }
     }
-    throw string("getElementByID error, ID not found"); 
+    return -1;
 }

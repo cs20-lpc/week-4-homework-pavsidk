@@ -23,7 +23,7 @@ int main()
   cout << "7. Exit" << endl;
   int choice;
   int id;
-  int position;
+  int position =-1;
   string name;
   double gpa;
   Course cc;
@@ -37,6 +37,9 @@ int main()
   do {
     cout << "Enter choice: " << endl;
     cin >> choice;
+    if (0 >= choice || choice > 7) {
+      cout << "Please enter an available choice. " << endl;
+    }
     switch (choice) {
       case 1:
         cout << "Enter ID: " << endl;
@@ -51,38 +54,66 @@ int main()
         break;
 
       case 2:
-        cout << "Enter ID to delete: " << endl;
-        cin >> id;
-        position = test.search(students_list, id);
-        students_list.remove(position);
-        cout << "Deleted student with ID " << id << endl;
+        if (students_list.getLength() == 0) {
+          cout << "There are no students in the list." << endl;
+        }
+        else {
+          position = -1;
+          while (position == -1) {
+            cout << "Enter ID to delete: " << endl;
+            cin >> id;
+            position = test.search(students_list, id);
+            if (position == -1) {cout<< "Please enter a valid ID. " << endl;}
+          }
+          try {
+            students_list.remove(position);
+            cout << "Deleted student with ID " << id << endl;
+          }
+          catch (string& e) {
+            cerr << e << endl;
+          }
+        }
         break;
 
       case 3:
-        cout << "Enter ID to search: " << endl;
-        cin >> id;
-        position = test.search(students_list, id);
-        cout << "Found: " << students_list.getElement(position).get_id() <<  " " << students_list.getElement(position).get_name() <<  " " << students_list.getElement(position).get_gpa() << endl;
-        cout << "Courses: "; //add courses
-        length_courses = students_list.getElement(position).get_courses_enrolled().getLength();
-        for (int i=0; i<length_courses; i++) {
-          cout << students_list.getElement(position).get_courses_enrolled().getElement(i).get_name() << " " << students_list.getElement(position).get_courses_enrolled().getElement(i).get_location() << endl;
+        if (students_list.getLength() == 0) {
+          cout << "There are no students in the list." << endl;
+        }
+        else {
+          position = -1;
+          while (position == -1) {
+            cout << "Enter ID to search: " << endl;
+            cin >> id;
+            position = test.search(students_list, id);
+            if (position == -1) {cout<< "Please enter a valid ID. " << endl;}
+          }
+          cout << "Found: " << students_list.getElement(position).get_id() <<  " " << students_list.getElement(position).get_name() <<  " " << students_list.getElement(position).get_gpa() << endl;
+          cout << "Courses: "; //add courses
+          length_courses = students_list.getElement(position).get_courses_enrolled().getLength();
+          for (int i=0; i<length_courses; i++) {
+            cout << students_list.getElement(position).get_courses_enrolled().getElement(i).get_name() << " " << students_list.getElement(position).get_courses_enrolled().getElement(i).get_location() << endl;
+          }
         }
         break;
 
       case 4:
-        cout << "Students in List: " << endl;
-        length = students_list.getLength();
-        for (int i=0; i<length; i++) {
-          cout << students_list.getElement(i).get_id() <<  " " << students_list.getElement(i).get_name() <<  " " << students_list.getElement(i).get_gpa() << " ";
-          length_courses = students_list.getElement(i).get_courses_enrolled().getLength();
-          for (int j=0; j<length_courses; j++) {
-            cout << students_list.getElement(i).get_courses_enrolled().getElement(j).get_name() << " " << students_list.getElement(i).get_courses_enrolled().getElement(j).get_location() << " ";
+        if (students_list.getLength() == 0) {
+            cout << "There are no students in the list." << endl;
           }
+        else {
+          cout << "Students in List: " << endl;
+          length = students_list.getLength();
+          for (int i=0; i<length; i++) {
+            cout << students_list.getElement(i).get_id() <<  " " << students_list.getElement(i).get_name() <<  " " << students_list.getElement(i).get_gpa() << " ";
+            length_courses = students_list.getElement(i).get_courses_enrolled().getLength();
+            for (int j=0; j<length_courses; j++) {
+              cout << students_list.getElement(i).get_courses_enrolled().getElement(j).get_name() << " " << students_list.getElement(i).get_courses_enrolled().getElement(j).get_location() << " ";
+            }
+            cout << endl;
+          }
+          //add courses
           cout << endl;
         }
-        //add courses
-        cout << endl;
         break;
 
       case 5:
@@ -90,16 +121,25 @@ int main()
         break;
 
       case 6:
-        cout << "Enter ID: " << endl;
-        cin >> id;
-        cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        position = test.search(students_list, id);
-        cout << "Enter Course Name: " << endl;
-        getline(std::cin, new_course);
-        cout << "Enter location: " << endl;
-        cin >> new_course_location;
-        cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        students_list.getElement(position).append_course_enrolled(Course(new_course, new_course_location));
+        if (students_list.getLength() == 0) {
+          cout << "Please insert a student before adding a course." << endl;
+        }
+        else {
+          position = -1;
+          while (position == -1) {
+            cout << "Enter ID: " << endl;
+            cin >> id;
+            cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            position = test.search(students_list, id);
+            if (position == -1) {cout<< "Please enter a valid ID. " << endl;}
+          }
+          cout << "Enter Course Name: " << endl;
+          getline(std::cin, new_course);
+          cout << "Enter location: " << endl;
+          cin >> new_course_location;
+          cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+          students_list.getElement(position).append_course_enrolled(Course(new_course, new_course_location));
+        }
         break;
 
       default:
