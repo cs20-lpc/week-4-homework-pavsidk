@@ -1,0 +1,123 @@
+1. Insert Student
+2. Delete Student
+3. Search Student
+4. Display All
+5. Count Students
+6. Add a course
+7. Exit
+Enter choice: 
+2
+There are no students in the list. //edge case - Trying to delete a student when the list of students is empty.
+
+Enter choice: 
+6
+Please insert a student before adding a course. //edge case - Trying add a course before adding a student.
+
+Enter choice: 
+1
+Enter ID: 
+101
+Enter Name: 
+Alice
+Enter GPA: 
+3.9
+
+Enter choice: 
+1
+Enter ID: 
+102
+Enter Name: 
+Bob
+Enter GPA: 
+3.4
+
+Enter choice: 
+4
+Students in List: 
+101 Alice 3.9 
+102 Bob 3.4 
+
+Enter choice: 
+2
+Enter ID to delete: 
+104
+Please enter a valid ID. //edge case - Entering an invalid ID into the delete operation.
+Enter ID to delete: 
+101
+Deleted student with ID 101
+
+Enter choice: 
+5
+Total students: 1
+
+Enter choice: 
+6
+Enter ID: 
+102                 
+Enter Course Name: 
+Multivarable Calculus
+Enter location: 
+2000
+
+Enter choice: 
+6
+Enter ID: 
+102
+Enter Course Name: 
+Data Structures   
+Enter location: 
+1100
+
+Enter choice: 
+3
+Enter ID to search: 
+102
+Found: 102 Bob 3.4
+Courses: Multivarable Calculus 2000
+Data Structures 1100
+
+Enter choice: 
+3
+Enter ID to search: 
+101
+Please enter a valid ID. //edge case - Entering an invalid ID into the search feature.
+Enter ID to search: 
+102
+Found: 102 Bob 3.4
+Courses: Multivarable Calculus 2000
+Data Structures 1100
+
+Enter choice: 
+7
+
+(base) Pavans-MacBook-2:week-4-homework-pavsidk pavan$ ./driver
+
+1. Insert Student
+2. Delete Student
+3. Search Student
+4. Display All
+5. Count Students
+6. Add a course
+7. Exit
+Enter choice: 
+4
+There are no students in the list. //edge case - Trying to display the all students when none are present in the list.
+Enter choice: 
+7
+
+*-----*
+
+CHATGPT COMPARISIONS:
+-GPT used cin.ignore(); before getline(), whereas I used cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+-GPT made another method, LinkedList::deleteById(id) to remove an element when given an id, whereas I made a Student::search method that finds the position of an ID in the list. It then uses the pre-existing LinkedList<T>::remove(position) method with this position. 
+-GPT created a separate method, LinkedList::insertEnd(const Student& s). I used the append method.
+-GPT created a method called display in both the Student and Course implementations. I used the accessor methods from the driver.cpp file to access and display Student and Course data.
+-GPT used the searchById(id) method with the display() method to search and display the contents of a specific Student node. I used getLength to verify that there is at least one node in the list, then I used the search(id) method and accessors to print the students information corresponding to that ID. 
+
+
+
+
+
+
+
+

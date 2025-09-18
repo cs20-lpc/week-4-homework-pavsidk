@@ -73,6 +73,7 @@ int main()
             cerr << e << endl;
           }
         }
+        cout << endl;
         break;
 
       case 3:
@@ -94,6 +95,7 @@ int main()
             cout << students_list.getElement(position).get_courses_enrolled().getElement(i).get_name() << " " << students_list.getElement(position).get_courses_enrolled().getElement(i).get_location() << endl;
           }
         }
+        cout << endl;
         break;
 
       case 4:
@@ -118,6 +120,7 @@ int main()
 
       case 5:
         cout << "Total students: " << students_list.getLength() << endl;
+        cout << endl;
         break;
 
       case 6:
@@ -140,6 +143,7 @@ int main()
           cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
           students_list.getElement(position).append_course_enrolled(Course(new_course, new_course_location));
         }
+        cout << endl;
         break;
 
       default:
