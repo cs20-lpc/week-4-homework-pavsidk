@@ -1,6 +1,14 @@
-// TODO:  Course class methods implementation here.
-
 #include "Course.hpp"
+
+Course::Course() {
+    this->location = 0;
+    this->course_name = "";
+}
+
+Course::Course(string course_name, int location) {
+    this->location = location;
+    this->course_name = course_name;
+}
 
 int Course::get_location() const {
     return this->location;

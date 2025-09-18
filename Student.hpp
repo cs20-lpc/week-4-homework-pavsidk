@@ -1,4 +1,3 @@
-// TO DO:  Student class definition  here.
 #ifndef STUDENT_HPP
 #define STUDENT_HPP
 
@@ -22,13 +21,17 @@ class Student {
         int get_id() const;
         string get_name() const;
         double get_gpa() const;
-        LinkedList<Course> get_courses_enrolled() const;
+        LinkedList<Course>& get_courses_enrolled();
         
         //mutators
         void set_id(int id);
         void set_name(string name);
         void set_gpa(double gpa);
-        void append_courses_enrolled(Course new_course);
+        void append_course_enrolled(const Course& new_course);
+
+        void print_student();
+
+        int search(LinkedList<Student>, int);
 };
 
 #endif

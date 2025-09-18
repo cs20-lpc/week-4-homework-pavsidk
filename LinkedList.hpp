@@ -44,9 +44,7 @@ class LinkedList : public List<T> {
         virtual void clear() override;
 
         // return the element at the given position (argument)
-        virtual T getElement(int) const override;
-
-        virtual int getIndexByID(int) const override;
+        virtual T& getElement(int) const override;
 
         // return the current length of the list
         virtual int getLength() const override;

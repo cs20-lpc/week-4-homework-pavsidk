@@ -83,7 +83,7 @@ void LinkedList<T>::copy(const LinkedList<T>& copyObj) {
 
 
 template <typename T>
-T LinkedList<T>::getElement(int position) const {
+T& LinkedList<T>::getElement(int position) const {
     if (position < 0 || position >= this->length) {
         throw string("getElement: error, position out of bounds");
     }
@@ -95,22 +95,6 @@ T LinkedList<T>::getElement(int position) const {
     }
 
     return curr->value;
-}
-
-
-template <typename T>
-int LinkedList<T>::getIndexByID(int id) const {
-    Node* curr = head;
-    int position = 0;
-
-    while (curr != nullptr) {
-        if (curr->value.id == id) {
-            return position;
-        }
-        curr = curr->next;
-        position++;
-    }
-    throw string("getElementByID error, ID not found"); 
 }
 
 template <typename T>

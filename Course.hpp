@@ -1,5 +1,3 @@
-// TODO:  Course class definitins go here.
-
 #ifndef COURSE_HPP
 #define COURSE_HPP
 
@@ -11,6 +9,9 @@ class Course {
         string course_name;
         int location;
     public:
+        Course();
+        Course(string course_name, int location);
+
         //accessors
         int get_location() const;
         string get_name() const;

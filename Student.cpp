@@ -1,5 +1,9 @@
-// TODO:  Student class methods implementation here.
 #include "Student.hpp"
+
+Student::Student() {
+    this->name = "";
+    this->id = 0;
+}   
 
 Student::Student(int id, string name, double gpa) {
     this->id = id;
@@ -18,7 +22,7 @@ double Student::get_gpa() const {
     return this->gpa;
 }
 
-LinkedList<Course> Student::get_courses_enrolled() const {
+LinkedList<Course>& Student::get_courses_enrolled() {
     return this->courses_enrolled;
 }
 
@@ -33,6 +37,23 @@ void Student::set_gpa(double gpa) {
     this->gpa = gpa;
 }
 
-void Student::append_courses_enrolled(Course new_course) {
-    this->courses_enrolled.append(new_course);
+void Student::append_course_enrolled(const Course& new_course) {
+    courses_enrolled.append(new_course);
+}
+
+void Student::print_student() {
+    cout << endl;
+}
+
+int Student::search(LinkedList<Student> students_list, int id) {
+    int length = students_list.getLength();
+    int c_id = -1;
+
+    for (int i = 0; i<length; i++) {
+        c_id = students_list.getElement(i).get_id();
+        if (c_id == id) {
+            return i;
+        }
+    }
+    throw string("getElementByID error, ID not found"); 
 }

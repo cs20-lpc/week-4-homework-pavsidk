@@ -28,6 +28,9 @@ int main()
   LinkedList<Student> students_list; 
   string new_course;
   int new_course_location;
+  Student test;
+  int length;
+  int length_courses;
 
   do {
     cout << "Enter choice: " << endl;
@@ -36,38 +39,47 @@ int main()
       case 1:
         cout << "Enter ID: " << endl;
         cin >> id;
+        cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         cout << "Enter Name: " << endl;
-        cin.ignore();
         getline(std::cin, name);
         cout << "Enter GPA: " << endl;
         cin >> gpa;
         students_list.append(Student(id, name, gpa));
+        cout << endl;
         break;
 
       case 2:
         cout << "Enter ID to delete: " << endl;
         cin >> id;
-        position = students_list.getIndexByID(id);
+        position = test.search(students_list, id);
         students_list.remove(position);
-        cout <<  "Deleted student with ID " << id << endl;
+        cout << "Deleted student with ID " << id << endl;
         break;
 
       case 3:
         cout << "Enter ID to search: " << endl;
         cin >> id;
-        try {
-          position = students_list.getIndexByID(id);
-          Student searched = students_list.getElement(position);
-          cout << "Found: " << searched.get_id() << " " << searched.get_name() << " " << searched.get_gpa() << endl; 
-          cout << "Courses: " << searched.get_courses_enrolled();
-        }
-        catch (string& e) {
-          cerr << e << endl;
+        position = test.search(students_list, id);
+        cout << "Found: " << students_list.getElement(position).get_id() <<  " " << students_list.getElement(position).get_name() <<  " " << students_list.getElement(position).get_gpa() << endl;
+        cout << "Courses: "; //add courses
+        length_courses = students_list.getElement(position).get_courses_enrolled().getLength();
+        for (int i=0; i<length_courses; i++) {
+          cout << students_list.getElement(position).get_courses_enrolled().getElement(i).get_name() << " " << students_list.getElement(position).get_courses_enrolled().getElement(i).get_location() << endl;
         }
         break;
 
       case 4:
         cout << "Students in List: " << endl;
+        length = students_list.getLength();
+        for (int i=0; i<length; i++) {
+          cout << students_list.getElement(i).get_id() <<  " " << students_list.getElement(i).get_name() <<  " " << students_list.getElement(i).get_gpa() << " ";
+          length_courses = students_list.getElement(i).get_courses_enrolled().getLength();
+          for (int j=0; j<length_courses; j++) {
+            cout << students_list.getElement(i).get_courses_enrolled().getElement(j).get_name() << " " << students_list.getElement(i).get_courses_enrolled().getElement(j).get_location() << " ";
+          }
+          cout << endl;
+        }
+        //add courses
         cout << endl;
         break;
 
@@ -78,21 +90,14 @@ int main()
       case 6:
         cout << "Enter ID: " << endl;
         cin >> id;
-        try {
-          position = students_list.getIndexByID(id);
-          Student searched = students_list.getElement(position);
-          cout << "Enter Course Name:" << endl;
-          cin.ignore();
-          getline(std::cin, new_course);
-          cc.set_course_name(new_course);
-          cout << "Enter location:" << endl;
-          cin >> new_course_location;
-          cc.set_location(new_course_location);
-          searched.append_course_enrolled(cc);
-        }
-        catch (string& e) {
-          cerr << e << endl;
-        }
+        cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        position = test.search(students_list, id);
+        cout << "Enter Course Name: " << endl;
+        getline(std::cin, new_course);
+        cout << "Enter location: " << endl;
+        cin >> new_course_location;
+        cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        students_list.getElement(position).append_course_enrolled(Course(new_course, new_course_location));
         break;
 
       default:

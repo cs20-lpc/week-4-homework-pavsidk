@@ -21,9 +21,7 @@ class List {
         virtual void clear() = 0;
 
         // return the element at the given position (argument)
-        virtual T getElement(int) const = 0;
-
-        virtual int getIndexByID(int) const = 0;
+        virtual T& getElement(int) const = 0;
 
         // return the current length of the list
         virtual int getLength() const = 0;
